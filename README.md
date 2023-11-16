@@ -53,7 +53,7 @@ O restante do arquivo são dados binários contendo a imagem bruta e descompacta
 
 Podemos recuperar o cabeçalho deste arquivo fazendo:
 
-    $ head -n 3 Tux.ppm
+    $ head -n 4 Tux.ppm
     P6
     265 314
     255
@@ -67,8 +67,8 @@ Para criar nosso pinguim (criptografado), queremos seguir os seguintes passos:
   
 Isso pode ser feito com os seguintes comandos:
 
-    head -n 3 Tux.ppm > Tux.header
-    tail -n +4 Tux.ppm > Tux.body
+    head -n 4 Tux.ppm > Tux.header
+    tail -n +5 Tux.ppm > Tux.body
     openssl enc -aes-128-ecb -nosalt -pass pass:"senha" -in Tux.body -out Tux.body.ecb
     cat Tux.header Tux.body.ecb > Tux.ecb.ppm
   
@@ -97,8 +97,8 @@ Não temos nenhuma pista aqui do que o conteúdo original poderia ter sido.
 Para alterar o modo de cifragem para *CBC*, simplemente basta mudar o algoritmo 
 para *aes-128-cbc", e alterar o arquivo de saída para *Tux.body.cbc*.
 
-    head -n 3 Tux.ppm > Tux.header
-    tail -n +4 Tux.ppm > Tux.body
+    head -n 4 Tux.ppm > Tux.header
+    tail -n +5 Tux.ppm > Tux.body
     openssl enc -aes-128-cbc -nosalt -pass pass:"rob" -in Tux.body -out Tux.body.cbc
     cat Tux.header Tux.body.cbc > Tux.ecb.ppm    
     
